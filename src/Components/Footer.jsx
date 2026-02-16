@@ -20,11 +20,17 @@ const Footer = () => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    const HEADER_OFFSET = 80;
+    const HEADER_OFFSET = 96;
     const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
 
     window.scrollTo({ top: y, behavior: "smooth" });
   };
+
+  const MAP_SEARCH =
+    "https://www.google.com/maps/search/?api=1&query=3A,+Bertram+St,+Esplanade,+Dharmatala,+Taltala,+Kolkata,+West+Bengal+700087";
+
+  const MAP_EMBED =
+    "https://www.google.com/maps?hl=en&q=3A%20Bertram%20St%2C%20Esplanade%2C%20Dharmatala%2C%20Taltala%2C%20Kolkata%2C%20West%20Bengal%20700087&z=16&output=embed";
 
   return (
     <footer
@@ -50,6 +56,7 @@ const Footer = () => {
               src={logo}
               alt="Better Pass Logo"
               className="w-10 h-10 object-contain rounded-md"
+              draggable="false"
             />
 
             <h4 className="font-extrabold text-lg sm:text-xl text-[#2B2B2B]">
@@ -82,6 +89,7 @@ const Footer = () => {
                 <button
                   onClick={() => scrollToSection(item.id)}
                   className="
+                    cursor-pointer
                     text-[#3F3A2F]
                     hover:text-[#7A6730]
                     transition
@@ -123,7 +131,7 @@ const Footer = () => {
             <li className="leading-relaxed">
               📍{" "}
               <a
-                href="https://www.google.com/maps/search/?api=1&query=3A,+Bertram+St,+Esplanade,+Dharmatala,+Taltala,+Kolkata,+West+Bengal+700087"
+                href={MAP_SEARCH}
                 target="_blank"
                 rel="noopener noreferrer"
                 className="hover:text-[#7A6730] transition focus:outline-none"
@@ -141,27 +149,37 @@ const Footer = () => {
             Our Location
           </h4>
 
-          <div className="w-full h-44 sm:h-48 rounded-2xl overflow-hidden shadow-xl bg-white/60 backdrop-blur-xl">
+          <div className="w-full h-44 sm:h-60 rounded-2xl overflow-hidden shadow-lg bg-white/60 backdrop-blur-xl border border-white/70">
             <iframe
               title="Better Pass Location"
-              src="https://www.google.com/maps?q=3A%20Bertram%20St%2C%20Esplanade%2C%20Dharmatala%2C%20Taltala%2C%20Kolkata%2C%20West%20Bengal%20700087&output=embed"
-              width="100%"
-              height="100%"
-              style={{ border: 0 }}
-              allowFullScreen=""
+              src={MAP_EMBED}
+              className="w-full h-full"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
-            ></iframe>
+              allowFullScreen
+            />
           </div>
+
+          {/* No overlay text (only link) */}
+          <a
+            href={MAP_SEARCH}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-block mt-3 text-sm font-semibold text-[#7A6730] hover:underline"
+          >
+            View on Google Maps →
+          </a>
         </div>
       </div>
 
       {/* BOTTOM */}
       <div className="relative mt-12 pt-5 text-center text-xs sm:text-sm text-[#3F3A2F]">
         <div className="h-px w-full bg-[#7A6730]/25 mb-4" />
-        © 2026{" "}
-        <span className="font-semibold text-[#2B2B2B]">Better Pass</span>. All
-        rights reserved.
+        <p>
+          © {new Date().getFullYear()}{" "}
+          <span className="font-semibold text-[#2B2B2B]">Better Pass</span>. All
+          rights reserved.
+        </p>
       </div>
     </footer>
   );
