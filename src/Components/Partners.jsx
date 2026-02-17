@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-const partners = [
+const PARTNERS = [
   {
     name: "Miss Ginko",
     type: "Restaurant",
@@ -31,85 +31,163 @@ const partners = [
 
 const Partners = () => {
   useEffect(() => {
-    AOS.init({
-      duration: 1000,
-      easing: "ease-out-cubic",
-      once: true,
-      offset: 80,
-    });
+    AOS.init({ duration: 1000, easing: "ease-out-cubic", once: true, offset: 80 });
   }, []);
 
   return (
-    <section
-      id="partners"
-      className="
-        relative w-full overflow-hidden
-        bg-gradient-to-br from-[#f5f2dc] via-[#e6e2c8] to-[#d7d1b0]
-        py-16 xs:py-20 sm:py-24 lg:py-32
-        px-3 xs:px-4 sm:px-6 lg:px-8
-      "
-    >
-      {/* Decorative blur */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-32 -left-24 w-96 h-96 bg-[#bfae70]/25 rounded-full blur-3xl" />
-        <div className="absolute -bottom-32 -right-24 w-96 h-96 bg-[#8c7a3d]/20 rounded-full blur-3xl" />
-      </div>
+    <>
+      <style>{`
+        .partner-card {
+          background: rgba(255,255,255,0.78);
+          backdrop-filter: blur(20px);
+          border: 1px solid rgba(255,255,255,0.85);
+          border-radius: 20px;
+          padding: 32px 28px;
+          display: flex;
+          flex-direction: column;
+          text-align: left;
+          box-shadow: 0 4px 28px rgba(0,0,0,0.07);
+          transition: transform 0.35s cubic-bezier(0.34,1.26,0.64,1),
+                      box-shadow 0.35s ease;
+          position: relative;
+          overflow: hidden;
+        }
+        @media (hover: hover) {
+          .partner-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 56px rgba(0,0,0,0.12);
+          }
+          .partner-card:hover .partner-bottom-line {
+            width: 48px;
+          }
+          .partner-card:hover .partner-top-bar {
+            opacity: 1;
+          }
+        }
+        .partner-top-bar {
+          position: absolute;
+          top: 0; left: 0; right: 0;
+          height: 2px;
+          background: linear-gradient(90deg, transparent, #7A6730, transparent);
+          opacity: 0;
+          transition: opacity 0.3s ease;
+        }
+        .partner-bottom-line {
+          width: 28px;
+          height: 2px;
+          border-radius: 99px;
+          background: linear-gradient(90deg, #7A6730, transparent);
+          margin-top: 24px;
+          transition: width 0.35s ease;
+        }
+      `}</style>
 
-      <div className="relative max-w-7xl mx-auto text-center">
-        {/* HEADING */}
-        <div className="mb-10 xs:mb-12 sm:mb-16" data-aos="fade-up">
-          <h2
-            className="
-              text-3xl xs:text-4xl md:text-5xl
-              font-extrabold
-              text-[#2B2B2B]
-            "
-          >
-            Our <span className="text-[#7A6730]">Trusted</span> Partners
-          </h2>
-
-          <p className="mt-4 text-sm xs:text-base sm:text-lg text-[#3F3A2F] max-w-3xl mx-auto leading-relaxed">
-            We collaborate with top restaurants, cafés, and premium experiences
-            to give you the best travel & lifestyle journey.
-          </p>
+      <section
+        id="partners"
+        className="relative w-full overflow-hidden py-20 sm:py-28 lg:py-36 px-4 sm:px-6 lg:px-8"
+        style={{ background: "linear-gradient(135deg, #f5f2dc 0%, #e6e2c8 50%, #d7d1b0 100%)" }}
+      >
+        {/* Background blobs */}
+        <div className="absolute inset-0 overflow-hidden pointer-events-none" aria-hidden="true">
+          <div
+            className="absolute -top-32 -left-24 w-96 h-96 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(191,174,112,0.25) 0%, transparent 70%)" }}
+          />
+          <div
+            className="absolute -bottom-32 -right-24 w-96 h-96 rounded-full"
+            style={{ background: "radial-gradient(circle, rgba(140,122,61,0.2) 0%, transparent 70%)" }}
+          />
         </div>
 
-        {/* GRID */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6 sm:gap-8">
-          {partners.map((partner, idx) => (
-            <div
-              key={idx}
-              data-aos="fade-up"
-              data-aos-delay={idx * 120}
-              className="
-                group
-                bg-white/75 backdrop-blur-xl
-                rounded-3xl p-6 sm:p-8
-                shadow-lg border border-white/60
-                transition-all duration-300
-                md:hover:-translate-y-2 md:hover:shadow-2xl
-                flex flex-col text-left
-              "
-            >
-              <h3 className="text-lg sm:text-xl font-extrabold text-[#2B2B2B]">
-                {partner.name}
-              </h3>
+        <div className="relative max-w-7xl mx-auto">
 
-              <p className="mt-2 text-xs sm:text-sm uppercase font-bold tracking-widest text-[#7A6730]">
-                {partner.type}
-              </p>
-
-              <p className="mt-4 text-sm sm:text-base text-[#3F3A2F] leading-relaxed flex-grow">
-                {partner.description}
-              </p>
-
-              {/* small bottom line */}
-              <div className="mt-6 h-[2px] w-14 bg-[#7A6730]/50 rounded-full" />
+          {/* Heading */}
+          <div className="text-center mb-14 sm:mb-16" data-aos="fade-up">
+            <div className="flex items-center justify-center gap-3 mb-4">
+              <div className="w-8 h-px bg-[#7A6730]" aria-hidden="true" />
+              <span className="text-[#7A6730] text-[11px] font-medium tracking-[0.22em] uppercase">
+                Who We Work With
+              </span>
+              <div className="w-8 h-px bg-[#7A6730]" aria-hidden="true" />
             </div>
-          ))}
+
+            <h2
+              className="font-extrabold text-[#2B2B2B] leading-tight"
+              style={{ fontSize: "clamp(2rem, 4.5vw, 3rem)" }}
+            >
+              Our{" "}
+              <span className="relative inline-block text-[#7A6730]">
+                Trusted
+                <span
+                  className="absolute left-0 -bottom-1 w-full h-0.5 rounded"
+                  style={{ background: "linear-gradient(90deg, #7A6730, transparent)" }}
+                  aria-hidden="true"
+                />
+              </span>{" "}
+              Partners
+            </h2>
+
+            <p
+              className="mt-5 text-[#3F3A2F] leading-relaxed max-w-2xl mx-auto"
+              style={{ fontSize: "clamp(0.88rem, 1.5vw, 1.05rem)" }}
+            >
+              We collaborate with top restaurants, cafés, and premium experiences
+              to give you the best travel & lifestyle journey.
+            </p>
+          </div>
+
+          {/* Cards */}
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-7 items-stretch">
+            {PARTNERS.map((partner, idx) => (
+              <div
+                key={partner.name}
+                className="partner-card"
+                data-aos="fade-up"
+                data-aos-delay={idx * 100}
+              >
+                {/* Top hover bar */}
+                <div className="partner-top-bar" aria-hidden="true" />
+
+                {/* Fixed top section: name + badge always same height */}
+                <div style={{ minHeight: 90 }}>
+                  {/* Name */}
+                  <h3
+                    className="font-extrabold text-[#2B2B2B] leading-snug mb-3"
+                    style={{ fontSize: "clamp(1.05rem, 1.6vw, 1.2rem)" }}
+                  >
+                    {partner.name}
+                  </h3>
+
+                  {/* Type badge */}
+                  <span
+                    className="inline-block text-[10px] font-semibold tracking-[0.2em] uppercase px-3 py-1 rounded-full"
+                    style={{
+                      background: "rgba(122,103,48,0.1)",
+                      color: "#7A6730",
+                      border: "1px solid rgba(122,103,48,0.2)",
+                    }}
+                  >
+                    {partner.type}
+                  </span>
+                </div>
+
+                {/* Description fills remaining space */}
+                <p
+                  className="mt-3 text-[#3F3A2F] leading-relaxed flex-grow"
+                  style={{ fontSize: "clamp(0.82rem, 1.2vw, 0.92rem)" }}
+                >
+                  {partner.description}
+                </p>
+
+                {/* Bottom accent line always at bottom */}
+                <div className="partner-bottom-line" aria-hidden="true" />
+              </div>
+            ))}
+          </div>
+
         </div>
-      </div>
-    </section>
+      </section>
+    </>
   );
 };
 

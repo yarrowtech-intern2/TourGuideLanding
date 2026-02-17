@@ -12,10 +12,11 @@ import Floating from "./Components/Floating";
 import Activities from "./Components/Activities";
 import BecomePartner from "./Components/BecomePartner";
 
+const HEADER_HEIGHT = 96;
+
 function HomePage() {
   return (
-    // ✅ ADD THIS padding-top (same as header height)
-    <main className="pt-[96px] overflow-x-hidden">
+    <>
       <Hero />
       <About />
       <Services />
@@ -25,24 +26,25 @@ function HomePage() {
       <FAQ />
       <ContactForm />
       <Floating />
-    </main>
+    </>
   );
 }
 
 export default function App() {
   return (
-    <div className="font-sans overflow-x-hidden">
+    <div className="font-sans">
       <Header />
 
-      <Routes>
-        <Route path="/" element={<HomePage />} />
-
-        {/* Optional Routes */}
-        <Route path="/about" element={<About />} />
-        <Route path="/services" element={<Services />} />
-        <Route path="/faq" element={<FAQ />} />
-        <Route path="/become" element={<BecomePartner />} />
-      </Routes>
+      {/* ✅ THIS FIXES HEADER OVERLAP */}
+      <div style={{ paddingTop: HEADER_HEIGHT }}>
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/about" element={<About />} />
+          <Route path="/services" element={<Services />} />
+          <Route path="/faq" element={<FAQ />} />
+          <Route path="/become" element={<BecomePartner />} />
+        </Routes>
+      </div>
 
       <Footer />
     </div>

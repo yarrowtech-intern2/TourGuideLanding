@@ -112,6 +112,7 @@ const Header = () => {
   return (
     <>
       <header
+        style={{ height: HEADER_HEIGHT }}
         className={`
           fixed top-0 left-0 w-full z-[999]
           bg-gradient-to-r from-[#d8b04a] via-[#e8c86a] to-[#d8b04a]
@@ -119,26 +120,25 @@ const Header = () => {
           ${isScrolled ? "shadow-xl" : ""}
         `}
       >
-        {/* ✅ TOP BAR ONLY (height fixed) */}
-        <div
-          className={`
-            w-full transition-all duration-300
-            ${isScrolled ? "py-2" : "py-4"}
-          `}
-          style={{ minHeight: HEADER_HEIGHT }}
-        >
-          <div className="max-w-7xl mx-auto flex items-center justify-between px-4 sm:px-6">
-            {/* LOGO */}
+        {/* FIXED HEIGHT HEADER CONTENT */}
+        <div className="w-full h-full flex items-center">
+          <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-4 sm:px-6">
+            {/* LOGO + TEXT */}
             <div
               onClick={() => scrollToSection("home")}
-              className="flex items-center gap-3 cursor-pointer select-none"
+              className="flex items-center gap-3 sm:gap-4 cursor-pointer select-none"
             >
               <img
                 src={logo}
                 alt="Logo"
-                className="h-10 sm:h-12 drop-shadow-md"
+                className="
+                  h-10 sm:h-12 md:h-14 lg:h-16
+                  w-auto object-contain
+                  drop-shadow-md
+                "
                 draggable="false"
               />
+
               <span className="text-lg sm:text-2xl font-extrabold text-white drop-shadow">
                 The Better Pass
               </span>
@@ -169,7 +169,6 @@ const Header = () => {
                 );
               })}
 
-              {/* POPUP OPEN BUTTON */}
               <button
                 type="button"
                 onClick={() => setPartnerPopup(true)}
@@ -197,7 +196,7 @@ const Header = () => {
           </div>
         </div>
 
-        {/* ✅ MOBILE MENU (Now inside header background) */}
+        {/* MOBILE MENU */}
         <div
           className={`
             md:hidden w-full
@@ -205,7 +204,14 @@ const Header = () => {
             ${mobileOpen ? "max-h-[750px] opacity-100" : "max-h-0 opacity-0"}
           `}
         >
-          <div className="px-6 pb-6 pt-2 flex flex-col gap-4">
+          <div
+            className="
+              px-6 pb-6 pt-4 flex flex-col gap-4
+              bg-gradient-to-r from-[#d8b04a] via-[#e8c86a] to-[#d8b04a]
+              border-t border-white/25
+              shadow-xl
+            "
+          >
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;
 
@@ -250,15 +256,12 @@ const Header = () => {
       {/* POPUP MODAL */}
       {partnerPopup && (
         <div className="fixed inset-0 z-[9999] flex items-center justify-center px-4">
-          {/* Background */}
           <div
             onClick={() => setPartnerPopup(false)}
             className="absolute inset-0 bg-black/70 backdrop-blur-sm"
           />
 
-          {/* Modal Box */}
           <div className="relative w-full max-w-4xl rounded-3xl shadow-2xl overflow-hidden">
-            {/* Close Button */}
             <button
               type="button"
               onClick={() => setPartnerPopup(false)}
