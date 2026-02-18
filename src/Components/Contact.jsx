@@ -93,16 +93,32 @@ const ContactForm = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  try {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setFormData(INITIAL_FORM);
-      showToast("success", "Message sent! Our team will contact you shortly.");
-    }, 1200);
-  };
+
+    await fetch(`${import.meta.env.VITE_SCRIPT_URL}`, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        project: "BP_CONTACT", // ✅ routes to "Better Pass Contact" sheet
+      }),
+    });
+
+    setFormData(INITIAL_FORM);
+    showToast("success", "Message sent! Our team will contact you shortly.");
+  } catch (err) {
+    console.error(err);
+    showToast("error", "Submission failed. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   const infoItems = [
     { Icon: FiClock,  title: "Quick Response",            sub: "We respond within 24 hours",     href: null },
@@ -361,7 +377,7 @@ const ContactForm = () => {
                   <label className="cf-label">Full Name <span>*</span></label>
                   <div className="cf-input-wrap">
                     <FiUser size={14} />
-                    <input type="text" name="name" placeholder="John Doe"
+                    <input type="text" name="name" placeholder="Enter Your Name"
                       value={formData.name} onChange={handleChange} autoComplete="name" />
                   </div>
                 </div>
@@ -370,7 +386,7 @@ const ContactForm = () => {
                   <label className="cf-label">Mobile No <span>*</span></label>
                   <div className="cf-input-wrap">
                     <FiPhone size={14} />
-                    <input type="tel" name="mobile" placeholder="9876543210"
+                    <input type="tel" name="mobile" placeholder="Enter Your Mobile No"
                       value={formData.mobile} onChange={handleChange} maxLength={10} autoComplete="tel" />
                   </div>
                 </div>
@@ -381,7 +397,7 @@ const ContactForm = () => {
                 <label className="cf-label">Email Address <span>*</span></label>
                 <div className="cf-input-wrap">
                   <FiMail size={14} />
-                  <input type="email" name="email" placeholder="you@example.com"
+                  <input type="email" name="email" placeholder="Enter Your Mail "
                     value={formData.email} onChange={handleChange} autoComplete="email" />
                 </div>
               </div>

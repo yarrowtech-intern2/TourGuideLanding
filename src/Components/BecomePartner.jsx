@@ -83,16 +83,32 @@ const BecomePartner = () => {
     return true;
   };
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!validate()) return;
+  const handleSubmit = async (e) => {
+  e.preventDefault();
+  if (!validate()) return;
+
+  try {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      setFormData(INITIAL_FORM);
-      showToast("success", "Thanks! Our team will contact you within 24 hours.");
-    }, 1200);
-  };
+
+    await fetch(`${import.meta.env.VITE_SCRIPT_URL}`, {
+      method: "POST",
+      mode: "no-cors",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        ...formData,
+        project: "PARTNER", // ✅ routes to "Become a Partner" sheet
+      }),
+    });
+
+    setFormData(INITIAL_FORM);
+    showToast("success", "Thanks! Our team will contact you within 24 hours.");
+  } catch (err) {
+    console.error(err);
+    showToast("error", "Could not submit. Please try again.");
+  } finally {
+    setLoading(false);
+  }
+};
 
   return (
     <>
