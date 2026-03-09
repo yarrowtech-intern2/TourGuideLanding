@@ -26,7 +26,8 @@ const Header = () => {
 
   // ✅ Shadow on scroll
   useEffect(() => {
-    const handleScroll = () => setIsScrolled(window.scrollY > 30);
+    // Change background when scrolling past hero section (approx 90vh or 800px)
+    const handleScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.9);
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -205,12 +206,16 @@ const Header = () => {
           `}
         >
           <div
-            className="
+            className={`
               px-6 pb-6 pt-4 flex flex-col gap-4
-              bg-gradient-to-r from-[#d8b04a] via-[#e8c86a] to-[#d8b04a]
               border-t border-white/25
               shadow-xl
-            "
+              ${
+                isScrolled
+                  ? "bg-gradient-to-r from-[#d8b04a]/95 via-[#e8c86a]/95 to-[#d8b04a]/95 backdrop-blur-md"
+                  : "bg-transparent backdrop-blur-md"
+              }
+            `}
           >
             {navLinks.map((link) => {
               const isActive = activeSection === link.id;

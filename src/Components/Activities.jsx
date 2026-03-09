@@ -33,7 +33,6 @@ const ACTIVITIES = [
     image: Gondhoraj,
     category: "Dining",
     num: "01",
-    description: `Gondhoraaj Kolkata is a cherished culinary destination known for its warm ambience, refined flavours, and signature Kolkata-style hospitality. Inspired by the city's timeless charm, the restaurant blends tradition with a modern dining experience.\n\nFrom aromatic Bengali delicacies to contemporary favourites, Gondhoraaj crafts each dish with care—much like the fragrant lime it is named after. Whether you're planning a family dinner, a friendly catch-up, or a quiet personal retreat, the restaurant offers the perfect space to unwind.`,
     highlights: [
       "Warm ambience + inviting interiors",
       "Authentic Bengali delicacies",
@@ -50,7 +49,6 @@ const ACTIVITIES = [
     image: Scoop,
     category: "Desserts",
     num: "02",
-    description: `Dive into a creamy world of flavours at Scoop, one of Kolkata's classic dessert destinations. This activity offers a curated tasting of Scoop's most loved ice-creams, sundaes, and frozen treats—perfect for dessert lovers, families, and fun weekend outings.\n\nEnjoy everything from classic vanilla scoops to rich chocolate sundaes, fruity sorbets, and their iconic ice-cream combos that have made Scoop a favourite in the New Market area.`,
     highlights: [
       "Choose any 3 Signature Scoops",
       "Try a Mini Sundae (hot chocolate / caramel drizzle)",
@@ -67,7 +65,6 @@ const ACTIVITIES = [
     image: GinkoBar,
     category: "Nightlife",
     num: "03",
-    description: `Step into the stylish bar-lounge of Miss Ginko after dusk, where Asian-fusion flavours meet handcrafted cocktails and music in a chic setting. Lounge on velvet sofas or high-chairs overlooking Rash Behari Avenue, sip signature drinks, and soak in the vibrant nightlife scene.\n\nIdeal for friends, date nights, or anyone looking for a premium bar experience in Kolkata.`,
     highlights: [
       "Full bar with professional mixologists",
       "Signature handcrafted cocktails",
@@ -84,7 +81,6 @@ const ACTIVITIES = [
     image: Ginko,
     category: "Café",
     num: "04",
-    description: `Spend a peaceful evening at Miss Ginko — one of Kolkata's most aesthetic and calming cafés. Enjoy handcrafted coffees, Japanese-inspired beverages, cold brews, and their signature matcha creations in a beautifully decorated ambience.\n\nPerfect for solo coffee lovers, study sessions, café dates, and aesthetic photography.`,
     highlights: [
       "Cozy aesthetic décor",
       "Books, lights, and floral interiors",
@@ -381,24 +377,6 @@ const Activity = () => {
                       ({a.reviews} reviews)
                     </span>
                   </div>
-
-                  {/* Divider */}
-                  <div
-                    className="my-5 w-full h-px rounded"
-                    style={{ background: "linear-gradient(to right, rgba(122,103,48,0.15), transparent)" }}
-                    aria-hidden="true"
-                  />
-
-                  {/* Description */}
-                  <p
-                    className="text-[#3F3A2F] leading-[1.82] whitespace-pre-line"
-                    style={{
-                      fontSize: "clamp(0.82rem, 1.15vw, 0.9rem)",
-                      fontFamily: "'Jost', sans-serif",
-                    }}
-                  >
-                    {a.description}
-                  </p>
 
                   {/* Highlights */}
                   <div className="mt-6">

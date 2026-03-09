@@ -179,7 +179,7 @@ const BecomePartner = () => {
 
       <section
         id="become-partner"
-        className="relative w-full overflow-hidden bg-gradient-to-br from-[#fbf9f1] via-[#f2efe2] to-[#e6e0c7] px-4 py-10 sm:px-6 lg:px-8"
+        className="relative w-full overflow-hidden bg-gradient-to-br from-[#fbf9f1] via-[#f2efe2] to-[#e6e0c7] px-3 py-8 sm:px-6 lg:px-8"
       >
         {/* Dot Pattern */}
         <div className="pointer-events-none absolute inset-0 opacity-50 [background-image:radial-gradient(rgba(122,103,48,0.14)_1px,transparent_1px)] [background-size:20px_20px]" />
@@ -193,7 +193,7 @@ const BecomePartner = () => {
         <div className="relative mx-auto max-w-3xl">
           <div
             data-aos="fade-up"
-            className="rounded-[24px] border border-white/90 bg-white/80 p-8 shadow-[0_12px_56px_rgba(0,0,0,0.10)] backdrop-blur-xl sm:p-10"
+            className="rounded-[24px] border border-white/90 bg-white/80 p-5 shadow-[0_12px_56px_rgba(0,0,0,0.10)] backdrop-blur-xl sm:p-10"
           >
             {/* Top bar */}
             <div className="mb-6 h-[2px] w-full rounded-full bg-gradient-to-r from-[#7A6730] via-[#c4a84a] to-[#7A6730]/10" />
@@ -207,7 +207,7 @@ const BecomePartner = () => {
               Submit your company details and we will contact you shortly.
             </p>
 
-            <form onSubmit={handleSubmit} className="mt-8 space-y-5">
+            <form onSubmit={handleSubmit} className="mt-6 sm:mt-8 space-y-4 sm:space-y-5">
               {/* Company Name */}
               <div>
                 <label className="mb-2 block text-[12px] font-semibold uppercase tracking-[0.12em] text-[#4a4438]">
@@ -226,7 +226,7 @@ const BecomePartner = () => {
                     onChange={handleChange}
                     placeholder="Enter company name"
                     autoComplete="organization"
-                    className="w-full rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3.5 pl-11 pr-4 text-[0.92rem] text-[#2B2B2B] outline-none transition
+                    className="w-full rounded-[14px] sm:rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3 sm:py-3.5 pl-10 sm:pl-11 pr-4 text-[0.85rem] sm:text-[0.92rem] text-[#2B2B2B] outline-none transition
                     placeholder:text-[#7A6730]/40 focus:border-[#7A6730] focus:bg-white focus:shadow-[0_0_0_3.5px_rgba(122,103,48,0.10)]"
                   />
                 </div>
@@ -249,7 +249,7 @@ const BecomePartner = () => {
                     value={formData.companyType}
                     onChange={handleChange}
                     placeholder="Example: Pvt Ltd / Agency / Service Provider"
-                    className="w-full rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3.5 pl-11 pr-4 text-[0.92rem] text-[#2B2B2B] outline-none transition
+                    className="w-full rounded-[14px] sm:rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3 sm:py-3.5 pl-10 sm:pl-11 pr-4 text-[0.85rem] sm:text-[0.92rem] text-[#2B2B2B] outline-none transition
                     placeholder:text-[#7A6730]/40 focus:border-[#7A6730] focus:bg-white focus:shadow-[0_0_0_3.5px_rgba(122,103,48,0.10)]"
                   />
                 </div>
@@ -274,7 +274,7 @@ const BecomePartner = () => {
                     placeholder="Enter mobile number"
                     maxLength={10}
                     autoComplete="tel"
-                    className="w-full rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3.5 pl-11 pr-4 text-[0.92rem] text-[#2B2B2B] outline-none transition
+                    className="w-full rounded-[14px] sm:rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3 sm:py-3.5 pl-10 sm:pl-11 pr-4 text-[0.85rem] sm:text-[0.92rem] text-[#2B2B2B] outline-none transition
                     placeholder:text-[#7A6730]/40 focus:border-[#7A6730] focus:bg-white focus:shadow-[0_0_0_3.5px_rgba(122,103,48,0.10)]"
                   />
                 </div>
@@ -298,7 +298,7 @@ const BecomePartner = () => {
                     onChange={handleChange}
                     placeholder="Enter email address"
                     autoComplete="email"
-                    className="w-full rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3.5 pl-11 pr-4 text-[0.92rem] text-[#2B2B2B] outline-none transition
+                    className="w-full rounded-[14px] sm:rounded-2xl border border-[#e0d7b8] bg-[#fdfcf7] py-3 sm:py-3.5 pl-10 sm:pl-11 pr-4 text-[0.85rem] sm:text-[0.92rem] text-[#2B2B2B] outline-none transition
                     placeholder:text-[#7A6730]/40 focus:border-[#7A6730] focus:bg-white focus:shadow-[0_0_0_3.5px_rgba(122,103,48,0.10)]"
                   />
                 </div>

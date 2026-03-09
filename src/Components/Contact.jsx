@@ -179,9 +179,9 @@ const ContactForm = () => {
     },
     {
       Icon: FiMail,
-      title: "electroniceducaresales@yarrowtech.co.in",
+      title: "support@betterpass.com",
       sub: "Drop us an email anytime",
-      href: "mailto:electroniceducaresales@yarrowtech.co.in",
+      href: "mailto:support@betterpass.com",
     },
     {
       Icon: FiMapPin,
