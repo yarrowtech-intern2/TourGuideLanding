@@ -177,7 +177,7 @@ const Footer = () => {
         <div className="h-px w-full bg-[#7A6730]/25 mb-4" />
         <p>
           © {new Date().getFullYear()}{" "}
-          <span className="font-semibold text-[#2B2B2B]">Better Pass</span>. All
+          <span className="font-semibold text-[#2B2B2B]">The Better Pass</span>. All
           rights reserved.
         </p>
       </div>
