@@ -54,13 +54,13 @@ const Footer = () => {
           <div className="flex items-center gap-3 mb-3">
             <img
               src={logo}
-              alt="Better Pass Logo"
+              alt="The Better Pass Logo"
               className="w-10 h-10 object-contain rounded-md"
               draggable="false"
             />
 
             <h4 className="font-extrabold text-lg sm:text-xl text-[#2B2B2B]">
-              Better <span className="text-[#7A6730]">Pass</span>
+              The Better <span className="text-[#7A6730]">Pass</span>
             </h4>
           </div>
 
