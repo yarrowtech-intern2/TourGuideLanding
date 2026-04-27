@@ -63,6 +63,7 @@ const Partners = () => {
                       box-shadow 0.38s ease;
           position: relative;
           overflow: hidden;
+          cursor: pointer;
         }
 
         @media (hover: hover) {

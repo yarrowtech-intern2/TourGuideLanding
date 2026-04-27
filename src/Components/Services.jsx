@@ -57,6 +57,10 @@ const Services = () => {
         .svc-card {
           transition: transform 0.35s cubic-bezier(0.25,0.46,0.45,0.94),
                       box-shadow 0.35s ease;
+          cursor: pointer;
+          backface-visibility: hidden;
+          transform-style: preserve-3d;
+          will-change: transform;
         }
         .svc-card:hover { transform: translateY(-8px); }
 

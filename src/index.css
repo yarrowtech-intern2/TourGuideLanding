@@ -1,18 +1,30 @@
 @import "tailwindcss";
 
-html,
+html {
+  scroll-behavior: smooth;
+}
+
 body {
-  width: 100%;
-  min-height: 100%;
-  overflow-x: hidden;
-  overflow-y: auto;
   margin: 0;
   padding: 0;
-  scroll-behavior: smooth;
+  width: 100%;
+  min-height: 100vh;
+  overflow-x: hidden;
+  background-color: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ── Global Interactive Cursors ── */
+button, 
+a, 
+input[type="button"], 
+input[type="submit"], 
+[role="button"],
+.cursor-pointer {
+  cursor: pointer !important;
 }
 
 #root {
   width: 100%;
-  min-height: 100vh;
-  overflow-x: hidden;
 }

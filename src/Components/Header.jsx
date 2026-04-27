@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../assets/Image/logo.png";
+import logo from "../assets/Image/logo.webp";
 import BecomePartner from "./BecomePartner";
 
 const navLinks = [
@@ -79,6 +79,18 @@ const Header = () => {
       document.documentElement.style.overflow = originalHtml || "";
     };
   }, [partnerPopup]);
+
+  // ✅ Close mobile menu on scroll
+  useEffect(() => {
+    if (!mobileOpen) return;
+
+    const handleScroll = () => {
+      setMobileOpen(false);
+    };
+
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [mobileOpen]);
 
   // ✅ ESC close popup
   useEffect(() => {

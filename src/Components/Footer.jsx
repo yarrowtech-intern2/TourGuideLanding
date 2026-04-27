@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 // ✅ Change logo path if needed
-import logo from "../assets/Image/logo.png";
+import logo from "../assets/Image/logo.webp";
 
 const Footer = () => {
   useEffect(() => {
@@ -48,35 +48,32 @@ const Footer = () => {
         <div className="absolute -bottom-32 -right-24 w-96 h-96 bg-[#8c7a3d]/20 rounded-full blur-3xl" />
       </div>
 
-      <div className="relative max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="relative max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-12 gap-x-8 gap-y-10">
         {/* BRAND */}
-        <div>
-          <div className="flex items-center gap-3 mb-3">
+        <div className="md:col-span-3">
+          <div className="flex items-center gap-3 mb-4">
             <img
               src={logo}
               alt="The Better Pass Logo"
               className="w-10 h-10 object-contain rounded-md"
               draggable="false"
             />
-
             <h4 className="font-extrabold text-lg sm:text-xl text-[#2B2B2B]">
               The Better <span className="text-[#7A6730]">Pass</span>
             </h4>
           </div>
-
-          <p className="text-sm sm:text-base text-[#3F3A2F] leading-relaxed">
+          <p className="text-sm sm:text-[0.92rem] text-[#3F3A2F] leading-relaxed opacity-90">
             Your trusted travel partner. Discover stunning destinations,
             exciting trips, and unforgettable experiences.
           </p>
         </div>
 
         {/* QUICK LINKS */}
-        <div>
-          <h4 className="font-bold text-base mb-4 text-[#2B2B2B]">
+        <div className="md:col-span-2">
+          <h4 className="font-bold text-base mb-5 text-[#2B2B2B] tracking-wide">
             Quick Links
           </h4>
-
-          <ul className="space-y-2 text-sm sm:text-base">
+          <ul className="space-y-3 text-sm sm:text-[0.92rem]">
             {[
               { label: "Home", id: "home" },
               { label: "About", id: "about" },
@@ -88,13 +85,7 @@ const Footer = () => {
               <li key={item.id}>
                 <button
                   onClick={() => scrollToSection(item.id)}
-                  className="
-                    cursor-pointer
-                    text-[#3F3A2F]
-                    hover:text-[#7A6730]
-                    transition
-                    focus:outline-none
-                  "
+                  className="cursor-pointer text-[#3F3A2F] hover:text-[#7A6730] transition font-medium"
                 >
                   {item.label}
                 </button>
@@ -104,70 +95,52 @@ const Footer = () => {
         </div>
 
         {/* CONTACT */}
-        <div>
-          <h4 className="font-bold text-base mb-4 text-[#2B2B2B]">Contact</h4>
-
-          <ul className="space-y-2 text-sm sm:text-base text-[#3F3A2F]">
-            <li>
-              📧{" "}
-              <a
-                href="mailto:support@betterpass.com"
-                className="hover:text-[#7A6730] transition focus:outline-none"
-              >
+        <div className="md:col-span-3">
+          <h4 className="font-bold text-base mb-5 text-[#2B2B2B] tracking-wide">Contact</h4>
+          <ul className="space-y-4 text-sm sm:text-[0.92rem] text-[#3F3A2F]">
+            <li className="flex items-start gap-3">
+              <span className="shrink-0 text-[#7A6730]">📧</span>
+              <a href="mailto:support@betterpass.com" className="hover:text-[#7A6730] transition font-medium">
                 support@betterpass.com
               </a>
             </li>
-
-            <li>
-              📞{" "}
-              <a
-                href="tel:+919830590929"
-                className="hover:text-[#7A6730] transition focus:outline-none"
-              >
+            <li className="flex items-start gap-3">
+              <span className="shrink-0 text-[#7A6730]">📞</span>
+              <a href="tel:+919830590929" className="hover:text-[#7A6730] transition font-medium">
                 +91 9830590929
               </a>
             </li>
-
-            <li className="leading-relaxed">
-              📍{" "}
-              <a
-                href={MAP_SEARCH}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hover:text-[#7A6730] transition focus:outline-none"
-              >
-                3A, Bertram St, Esplanade, Dharmatala, Taltala, Kolkata, West
-                Bengal 700087
+            <li className="flex items-start gap-3 leading-relaxed">
+              <span className="shrink-0 text-[#7A6730]">📍</span>
+              <a href={MAP_SEARCH} target="_blank" rel="noopener noreferrer" className="hover:text-[#7A6730] transition font-medium">
+                3A, Bertram St, Esplanade, Dharmatala, Kolkata, WB 700087
               </a>
             </li>
           </ul>
         </div>
 
         {/* MAP */}
-        <div>
-          <h4 className="font-bold text-base mb-4 text-[#2B2B2B]">
+        <div className="md:col-span-4">
+          <h4 className="font-bold text-base mb-5 text-[#2B2B2B] tracking-wide">
             Our Location
           </h4>
-
-          <div className="w-full h-44 sm:h-60 rounded-2xl overflow-hidden shadow-lg bg-white/60 backdrop-blur-xl border border-white/70">
+          <div className="w-full h-48 sm:h-64 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] bg-white/60 backdrop-blur-xl border border-white/70 transition-transform duration-500 hover:scale-[1.02]">
             <iframe
               title="Better Pass Location"
               src={MAP_EMBED}
-              className="w-full h-full"
+              className="w-full h-full grayscale-[20%] contrast-[1.1]"
               loading="lazy"
               referrerPolicy="no-referrer-when-downgrade"
               allowFullScreen
             />
           </div>
-
-          {/* No overlay text (only link) */}
           <a
             href={MAP_SEARCH}
             target="_blank"
             rel="noopener noreferrer"
-            className="inline-block mt-3 text-sm font-semibold text-[#7A6730] hover:underline"
+            className="inline-flex items-center mt-4 text-[13px] font-bold text-[#7A6730] hover:translate-x-1 transition-transform"
           >
-            View on Google Maps →
+            View Panoramic Map <span className="ml-2">→</span>
           </a>
         </div>
       </div>

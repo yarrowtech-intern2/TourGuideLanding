@@ -1,7 +1,7 @@
 import React, { useEffect } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
-import aboutImg from "../assets/Image/about.jpg";
+import aboutImg from "../assets/Image/about.webp";
 
 const PLAY_STORE_URL =
   "https://play.google.com/store/apps/details?id=com.exploremore.app";

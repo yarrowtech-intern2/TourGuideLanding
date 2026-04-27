@@ -3,11 +3,11 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 // Images — your original imports, unchanged
-import mountain from "../assets/Image/mountain.jpg.jpeg";
-import mountain1 from "../assets/Image/mountain1.jpg.jpeg";
-import temple from "../assets/Image/Pareshnath-Jain-Temple.jpg.jpeg";
-import sea from "../assets/Image/sea.jpg.jpeg";
-import Victoria from "../assets/Image/Victoria-Memorial.jpg.jpeg";
+import mountain from "../assets/Image/mountain.webp";
+import mountain1 from "../assets/Image/mountain1.webp";
+import temple from "../assets/Image/Pareshnath-Jain-Temple.webp";
+import sea from "../assets/Image/sea.webp";
+import Victoria from "../assets/Image/Victoria-Memorial.webp";
 
 const slides = [
   { img: mountain, label: "Himalayas", region: "North India" },

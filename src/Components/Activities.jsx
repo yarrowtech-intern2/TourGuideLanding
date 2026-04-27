@@ -4,9 +4,9 @@ import "aos/dist/aos.css";
 import { FaStar, FaRegStar } from "react-icons/fa";
 
 import Gondhoraj from "../assets/Image/Gondhoraj.webp";
-import Scoop     from "../assets/Image/Scoop.png";
+import Scoop     from "../assets/Image/Scoop.webp";
 import GinkoBar  from "../assets/Image/GinkoBar.webp";
-import Ginko     from "../assets/Image/Ginko.png";
+import Ginko     from "../assets/Image/Ginko.webp";
 
 // ── Star renderer — unchanged ─────────────────────────────────────────────────
 const Stars = ({ value }) => {
@@ -122,6 +122,10 @@ const Activity = () => {
             transform 0.42s cubic-bezier(0.34,1.26,0.64,1),
             box-shadow 0.42s ease;
           position: relative;
+          cursor: pointer;
+          backface-visibility: hidden;
+          transform-style: preserve-3d;
+          will-change: transform;
         }
 
         /* Top accent bar */

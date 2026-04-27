@@ -1,40 +1,77 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useRef } from "react";
 import AOS from "aos";
 import "aos/dist/aos.css";
 
-import agra       from "../assets/Image/agra.jpeg";
-import kolkata    from "../assets/Image/kolkata.jpg";
-import delhi      from "../assets/Image/delhi.jpg";
-import mumbai     from "../assets/Image/mumbai.jpg";
-import odisha     from "../assets/Image/odisha.jpg";
-import varanasi   from "../assets/Image/varanasi.jpg";
-import jaipur     from "../assets/Image/jaipur.jpg";
-import darjeeling from "../assets/Image/darjeeling.jpg";
-import amritsar   from "../assets/Image/amritsar.jpg";
-import goa        from "../assets/Image/goa.jpg";
-import vadodara   from "../assets/Image/vadodara.jpg";
-import udaipur    from "../assets/Image/udaipur.jpg";
+import agra       from "../assets/Image/agra.webp";
+import kolkata    from "../assets/Image/kolkata.webp";
+import delhi      from "../assets/Image/delhi.webp";
+import mumbai     from "../assets/Image/mumbai.webp";
+import odisha     from "../assets/Image/odisha.webp";
+import varanasi   from "../assets/Image/varanasi.webp";
+import jaipur     from "../assets/Image/jaipur.webp";
+import darjeeling from "../assets/Image/darjeeling.webp";
+import amritsar   from "../assets/Image/amritsar.webp";
+import goa        from "../assets/Image/goa.webp";
+import vadodara   from "../assets/Image/vadodara.webp";
+import udaipur    from "../assets/Image/udaipur.webp";
 
 const DESTINATIONS = [
-  { img: agra,       title: "Agra",       tag: "Taj Mahal",        num: "01" },
-  { img: kolkata,    title: "Kolkata",    tag: "City of Joy",      num: "02" },
-  { img: delhi,      title: "Delhi",      tag: "Capital City",     num: "03" },
-  { img: mumbai,     title: "Mumbai",     tag: "City of Dreams",   num: "04" },
-  { img: odisha,     title: "Odisha",     tag: "Temples & Beaches",num: "05" },
-  { img: varanasi,   title: "Varanasi",   tag: "Spiritual City",   num: "06" },
-  { img: jaipur,     title: "Jaipur",     tag: "Pink City",        num: "07" },
-  { img: darjeeling, title: "Darjeeling", tag: "Hill Station",     num: "08" },
-  { img: amritsar,   title: "Amritsar",   tag: "Golden Temple",    num: "09" },
-  { img: goa,        title: "Goa",        tag: "Beach Paradise",   num: "10" },
-  { img: vadodara,   title: "Vadodara",   tag: "Royal Heritage",   num: "11" },
-  { img: udaipur,    title: "Udaipur",    tag: "City of Lakes",    num: "12" },
+  { img: agra,       title: "Agra",       tag: "Taj Mahal",       },
+  { img: kolkata,    title: "Kolkata",    tag: "City of Joy",      },
+  { img: delhi,      title: "Delhi",      tag: "Capital City",     },
+  { img: mumbai,     title: "Mumbai",     tag: "City of Dreams",  },
+  { img: odisha,     title: "Odisha",     tag: "Temples & Beaches",},
+  { img: varanasi,   title: "Varanasi",   tag: "Spiritual City", },
+  { img: jaipur,     title: "Jaipur",     tag: "Pink City",      },
+  { img: darjeeling, title: "Darjeeling", tag: "Hill Station",   },
+  { img: amritsar,   title: "Amritsar",   tag: "Golden Temple",  },
+  { img: goa,        title: "Goa",        tag: "Beach Paradise", },
+  { img: vadodara,   title: "Vadodara",   tag: "Royal Heritage", },
+  { img: udaipur,    title: "Udaipur",    tag: "City of Lakes",  },
 ];
 
 const looped = [...DESTINATIONS, ...DESTINATIONS];
 
 const Destinations = () => {
+  const scrollRef = useRef(null);
+
   useEffect(() => {
-    AOS.init({ duration: 1000, easing: "ease-out-cubic", once: true, offset: 80 });
+    const el = scrollRef.current;
+    if (!el) return;
+
+    let animationFrameId;
+    let isPaused = false;
+
+    const scroll = () => {
+      if (!isPaused) {
+        el.scrollLeft += 1; // Adjust speed here
+        // Seamless loop check
+        if (el.scrollLeft >= el.scrollWidth / 2) {
+          el.scrollLeft = 0;
+        }
+      }
+      animationFrameId = requestAnimationFrame(scroll);
+    };
+
+    const handleMouseEnter = () => { isPaused = true; };
+    const handleMouseLeave = () => { isPaused = false; };
+    const handleTouchStart = () => { isPaused = true; };
+    const handleTouchEnd   = () => { isPaused = false; };
+
+    animationFrameId = requestAnimationFrame(scroll);
+
+    el.addEventListener("mouseenter", handleMouseEnter);
+    el.addEventListener("mouseleave", handleMouseLeave);
+    el.addEventListener("touchstart", handleTouchStart);
+    el.addEventListener("touchend",   handleTouchEnd);
+
+    return () => {
+      cancelAnimationFrame(animationFrameId);
+      el.removeEventListener("mouseenter", handleMouseEnter);
+      el.removeEventListener("mouseleave", handleMouseLeave);
+      el.removeEventListener("touchstart", handleTouchStart);
+      el.removeEventListener("touchend",   handleTouchEnd);
+    };
   }, []);
 
   return (
@@ -51,16 +88,30 @@ const Destinations = () => {
           background-size: 20px 20px;
         }
 
-        /* ── Marquee track ── */
-        .marquee-track {
+        /* ── Scrollable Track ── */
+        .marquee-container {
           display: flex;
           gap: 18px;
-          width: max-content;
-          animation: marquee-scroll 42s linear infinite;
-          will-change: transform;
+          overflow-x: auto;
+          overflow-y: hidden;
+          padding: 20px 0 40px;
+          -ms-overflow-style: none;  /* IE and Edge */
+          scrollbar-width: none;     /* Firefox */
+          cursor: grab;
+          user-select: none;
         }
-        .marquee-track:hover {
-          animation-play-state: paused;
+        .marquee-container::-webkit-scrollbar {
+          display: none; /* Chrome, Safari and Opera */
+        }
+        .marquee-container:active {
+          cursor: grabbing;
+        }
+
+        /* ── Card Wrapper (Static Area) ── */
+        .marquee-card-wrapper {
+          padding: 15px 0; /* Space for the card to move without losing hover */
+          flex-shrink: 0;
+          cursor: pointer;
         }
 
         /* ── Card base ── */
@@ -70,19 +121,20 @@ const Destinations = () => {
           position: relative;
           overflow: hidden;
           border-radius: 18px;
-          flex-shrink: 0;
-          cursor: pointer;
           border: 1.5px solid rgba(255,255,255,0.55);
           box-shadow: 0 8px 36px rgba(0,0,0,0.14);
           transition:
             transform 0.45s cubic-bezier(0.34,1.26,0.64,1),
             box-shadow 0.45s ease;
+          backface-visibility: hidden;
+          transform-style: preserve-3d;
+          will-change: transform;
         }
         @media (min-width: 640px)  { .marquee-card { min-width: 265px; height: 360px; } }
         @media (min-width: 1024px) { .marquee-card { min-width: 280px; height: 385px; } }
 
-        .marquee-card:hover {
-          transform: translateY(-10px) scale(1.03);
+        .marquee-card-wrapper:hover .marquee-card {
+          transform: translateY(-12px) scale(1.02);
           box-shadow: 0 28px 64px rgba(0,0,0,0.22), 0 4px 16px rgba(122,103,48,0.18);
         }
 
@@ -94,7 +146,7 @@ const Destinations = () => {
           transition: transform 0.8s cubic-bezier(0.25,0.46,0.45,0.94);
           user-select: none; -webkit-user-drag: none;
         }
-        .marquee-card:hover .card-img { transform: scale(1.10); }
+        .marquee-card-wrapper:hover .card-img { transform: scale(1.10); }
 
         /* ── Overlays ── */
         .card-overlay {
@@ -118,7 +170,7 @@ const Destinations = () => {
           opacity: 0;
           transition: opacity 0.5s ease;
         }
-        .marquee-card:hover .card-shimmer { opacity: 1; }
+        .marquee-card-wrapper:hover .card-shimmer { opacity: 1; }
 
         /* ── Top bar on hover ── */
         .card-top-bar {
@@ -127,7 +179,7 @@ const Destinations = () => {
           opacity: 0;
           transition: opacity 0.4s ease;
         }
-        .marquee-card:hover .card-top-bar { opacity: 1; }
+        .marquee-card-wrapper:hover .card-top-bar { opacity: 1; }
 
         /* ── Tag pill ── */
         .card-tag {
@@ -146,7 +198,7 @@ const Destinations = () => {
           border-radius: 99px;
           transition: background 0.3s ease, border-color 0.3s ease;
         }
-        .marquee-card:hover .card-tag {
+        .marquee-card-wrapper:hover .card-tag {
           background: rgba(200,169,110,0.20);
           border-color: rgba(200,169,110,0.50);
         }
@@ -162,7 +214,7 @@ const Destinations = () => {
           user-select: none; pointer-events: none;
           transition: color 0.4s ease;
         }
-        .marquee-card:hover .card-num { color: rgba(200,169,110,0.14); }
+        .marquee-card-wrapper:hover .card-num { color: rgba(200,169,110,0.14); }
 
         /* ── Card body ── */
         .card-body {
@@ -177,7 +229,7 @@ const Destinations = () => {
           letter-spacing: -0.01em;
           transition: color 0.3s ease;
         }
-        .marquee-card:hover .card-city { color: rgba(245,225,180,1); }
+        .marquee-card-wrapper:hover .card-city { color: rgba(245,225,180,1); }
 
         .card-sub {
           font-family: 'Jost', sans-serif;
@@ -188,7 +240,7 @@ const Destinations = () => {
           opacity: 0; transform: translateY(6px);
           transition: opacity 0.35s ease, transform 0.35s ease;
         }
-        .marquee-card:hover .card-sub { opacity: 1; transform: translateY(0); }
+        .marquee-card-wrapper:hover .card-sub { opacity: 1; transform: translateY(0); }
 
         .card-line {
           width: 0; height: 1.5px;
@@ -197,25 +249,8 @@ const Destinations = () => {
           margin-top: 8px;
           transition: width 0.4s cubic-bezier(0.25,0.46,0.45,0.94);
         }
-        .marquee-card:hover .card-line { width: 40px; }
+        .marquee-card-wrapper:hover .card-line { width: 40px; }
 
-        /* ── Marquee animation ── */
-        @keyframes marquee-scroll {
-          0%   { transform: translateX(0); }
-          100% { transform: translateX(-50%); }
-        }
-
-        /* ── Edge fades on marquee wrapper ── */
-        .marquee-fade-left {
-          position: absolute; top: 0; left: 0; bottom: 0; width: 80px; z-index: 2;
-          background: linear-gradient(to right, #ede9d0, transparent);
-          pointer-events: none;
-        }
-        .marquee-fade-right {
-          position: absolute; top: 0; right: 0; bottom: 0; width: 80px; z-index: 2;
-          background: linear-gradient(to left, #ede9d0, transparent);
-          pointer-events: none;
-        }
       `}</style>
 
       <section
@@ -329,42 +364,39 @@ const Destinations = () => {
         <div
           data-aos="fade-up"
           data-aos-delay="150"
-          className="relative overflow-hidden"
+          className="relative"
         >
-          {/* Edge fade left */}
-          <div className="marquee-fade-left" aria-hidden="true" />
-          {/* Edge fade right */}
-          <div className="marquee-fade-right" aria-hidden="true" />
-
-          <div className="marquee-track">
+          <div ref={scrollRef} className="marquee-container">
             {looped.map((dest, idx) => (
-              <div key={idx} className="marquee-card">
-                {/* Image */}
-                <img
-                  src={dest.img}
-                  alt={dest.title}
-                  draggable="false"
-                  className="card-img"
-                />
+              <div key={idx} className="marquee-card-wrapper">
+                <div className="marquee-card">
+                  {/* Image */}
+                  <img
+                    src={dest.img}
+                    alt={dest.title}
+                    draggable="false"
+                    className="card-img"
+                  />
 
-                {/* Overlays */}
-                <div className="card-overlay" aria-hidden="true" />
-                <div className="card-shimmer" aria-hidden="true" />
+                  {/* Overlays */}
+                  <div className="card-overlay" aria-hidden="true" />
+                  <div className="card-shimmer" aria-hidden="true" />
 
-                {/* Top accent */}
-                <div className="card-top-bar" aria-hidden="true" />
+                  {/* Top accent */}
+                  <div className="card-top-bar" aria-hidden="true" />
 
-                {/* Ghost number */}
-                <span className="card-num">{dest.num}</span>
+                  {/* Ghost number */}
+                  <span className="card-num">{dest.num}</span>
 
-                {/* Tag pill */}
-                <span className="card-tag">{dest.tag}</span>
+                  {/* Tag pill */}
+                  <span className="card-tag">{dest.tag}</span>
 
-                {/* Body */}
-                <div className="card-body">
-                  <p className="card-city">{dest.title}</p>
-                  <p className="card-sub">India</p>
-                  <div className="card-line" aria-hidden="true" />
+                  {/* Body */}
+                  <div className="card-body">
+                    <p className="card-city">{dest.title}</p>
+                    <p className="card-sub">India</p>
+                    <div className="card-line" aria-hidden="true" />
+                  </div>
                 </div>
               </div>
             ))}
