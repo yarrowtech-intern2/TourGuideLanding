@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../assets/Image/Logo.png";
+import logo from "../assets/Image/logo.png";
 import BecomePartner from "./BecomePartner";
 
 const navLinks = [

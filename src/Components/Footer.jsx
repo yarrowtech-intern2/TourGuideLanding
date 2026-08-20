@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 // ✅ Change logo path if needed
-import logo from "../assets/Image/Logo.png";
+import logo from "../assets/Image/logo.png";
 
 const Footer = () => {
   useEffect(() => {
