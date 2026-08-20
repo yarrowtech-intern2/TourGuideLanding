@@ -3,7 +3,7 @@ import AOS from "aos";
 import "aos/dist/aos.css";
 
 // ✅ Change logo path if needed
-import logo from "../assets/Image/logo.webp";
+import logo from "../assets/Image/Logo.png";
 
 const Footer = () => {
   useEffect(() => {
@@ -20,7 +20,7 @@ const Footer = () => {
     const el = document.getElementById(id);
     if (!el) return;
 
-    const HEADER_OFFSET = 96;
+    const HEADER_OFFSET = 80;
     const y = el.getBoundingClientRect().top + window.scrollY - HEADER_OFFSET;
 
     window.scrollTo({ top: y, behavior: "smooth" });
@@ -36,9 +36,11 @@ const Footer = () => {
     <footer
       className="
         relative w-full overflow-hidden
-        bg-gradient-to-br from-[#f5f2dc] via-[#e6e2c8] to-[#d7d1b0]
+        bg-gradient-to-br from-[#f5f0d8] via-[#ebe3c5] to-[#decfa8]
+        border-t-2 border-[#b89f58]/40
         pt-16 pb-8
         px-4 sm:px-6 lg:px-8
+        text-[#2B2B2B]
       "
       data-aos="fade-up"
     >
@@ -54,13 +56,10 @@ const Footer = () => {
           <div className="flex items-center gap-3 mb-4">
             <img
               src={logo}
-              alt="The Better Pass Logo"
-              className="w-10 h-10 object-contain rounded-md"
+              alt="Logo"
+              className="h-20 sm:h-24 w-auto object-contain drop-shadow-[0_2px_8px_rgba(0,0,0,0.08)]"
               draggable="false"
             />
-            <h4 className="font-extrabold text-lg sm:text-xl text-[#2B2B2B]">
-              The Better <span className="text-[#7A6730]">Pass</span>
-            </h4>
           </div>
           <p className="text-sm sm:text-[0.92rem] text-[#3F3A2F] leading-relaxed opacity-90">
             Your trusted travel partner. Discover stunning destinations,
@@ -85,7 +84,7 @@ const Footer = () => {
               <li key={item.id}>
                 <button
                   onClick={() => scrollToSection(item.id)}
-                  className="cursor-pointer text-[#3F3A2F] hover:text-[#7A6730] transition font-medium"
+                  className="cursor-pointer text-[#3F3A2F] hover:text-[#7A6730] transition font-semibold"
                 >
                   {item.label}
                 </button>
@@ -124,7 +123,7 @@ const Footer = () => {
           <h4 className="font-bold text-base mb-5 text-[#2B2B2B] tracking-wide">
             Our Location
           </h4>
-          <div className="w-full h-48 sm:h-64 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] bg-white/60 backdrop-blur-xl border border-white/70 transition-transform duration-500 hover:scale-[1.02]">
+          <div className="w-full h-48 sm:h-64 rounded-2xl overflow-hidden shadow-[0_8px_30px_rgba(0,0,0,0.08)] bg-white/70 backdrop-blur-xl border border-white/80 transition-transform duration-500 hover:scale-[1.02]">
             <iframe
               title="Better Pass Location"
               src={MAP_EMBED}
@@ -147,7 +146,7 @@ const Footer = () => {
 
       {/* BOTTOM */}
       <div className="relative mt-12 pt-5 text-center text-xs sm:text-sm text-[#3F3A2F]">
-        <div className="h-px w-full bg-[#7A6730]/25 mb-4" />
+        <div className="h-px w-full bg-[#b89f58]/30 mb-4" />
         <p>
           © {new Date().getFullYear()}{" "}
           <span className="font-semibold text-[#2B2B2B]">The Better Pass</span>. All

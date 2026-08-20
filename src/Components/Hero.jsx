@@ -17,7 +17,7 @@ const slides = [
   { img: Victoria, label: "Victoria Memorial", region: "Kolkata" },
 ];
 
-const HEADER_HEIGHT = 96;
+const HEADER_HEIGHT = 80;
 const DURATION = 5000;
 const TICK = 40;
 
@@ -219,8 +219,7 @@ const Hero = () => {
         id="home"
         className="hero-root relative w-full overflow-hidden"
         style={{
-          height: `calc(100svh - ${HEADER_HEIGHT}px)`,
-          paddingTop: HEADER_HEIGHT,
+          height: "100vh",
         }}
       >
         {/* Fallback background — no white flash */}

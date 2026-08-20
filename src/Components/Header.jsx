@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import logo from "../assets/Image/logo.webp";
+import logo from "../assets/Image/Logo.png";
 import BecomePartner from "./BecomePartner";
 
 const navLinks = [
@@ -13,7 +13,7 @@ const navLinks = [
   { label: "Contact", id: "contact" },
 ];
 
-const HEADER_HEIGHT = 96;
+const HEADER_HEIGHT = 80;
 
 const Header = () => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -24,10 +24,9 @@ const Header = () => {
   const location = useLocation();
   const navigate = useNavigate();
 
-  // ✅ Shadow on scroll
+  // ✅ Shadow & Background toggle on scroll
   useEffect(() => {
-    // Change background when scrolling past hero section (approx 90vh or 800px)
-    const handleScroll = () => setIsScrolled(window.scrollY > window.innerHeight * 0.9);
+    const handleScroll = () => setIsScrolled(window.scrollY > 40);
     window.addEventListener("scroll", handleScroll, { passive: true });
     handleScroll();
     return () => window.removeEventListener("scroll", handleScroll);
@@ -128,37 +127,41 @@ const Header = () => {
         style={{ height: HEADER_HEIGHT }}
         className={`
           fixed top-0 left-0 w-full z-[999]
-          bg-gradient-to-r from-[#d8b04a] via-[#e8c86a] to-[#d8b04a]
           transition-all duration-300
-          ${isScrolled ? "shadow-xl" : ""}
+          ${
+            isScrolled
+              ? "bg-white/40 backdrop-blur-md border-b border-[#7A6730]/20 shadow-sm"
+              : "bg-transparent border-b border-transparent shadow-none"
+          }
         `}
       >
         {/* FIXED HEIGHT HEADER CONTENT */}
         <div className="w-full h-full flex items-center">
           <div className="max-w-7xl mx-auto w-full flex items-center justify-between px-4 sm:px-6">
-            {/* LOGO + TEXT */}
+            {/* LOGO */}
             <div
               onClick={() => scrollToSection("home")}
-              className="flex items-center gap-3 sm:gap-4 cursor-pointer select-none"
+              className="flex items-center gap-3 cursor-pointer select-none"
             >
               <img
                 src={logo}
                 alt="Logo"
-                className="
-                  h-10 sm:h-12 md:h-14 lg:h-16
+                className={`
+                  h-12 sm:h-14 md:h-16 lg:h-20
                   w-auto object-contain
-                  drop-shadow-md
-                "
+                  hover:scale-105 transition-transform duration-200
+                  ${
+                    isScrolled
+                      ? "drop-shadow-[0_1px_4px_rgba(0,0,0,0.06)]"
+                      : "drop-shadow-[0_2px_10px_rgba(0,0,0,0.4)]"
+                  }
+                `}
                 draggable="false"
               />
-
-              <span className="text-lg sm:text-2xl font-extrabold text-white drop-shadow">
-                The Better Pass
-              </span>
             </div>
 
             {/* DESKTOP NAV */}
-            <nav className="hidden md:flex items-center gap-7 lg:gap-9">
+            <nav className="hidden md:flex items-center gap-6 lg:gap-8">
               {navLinks.map((link) => {
                 const isActive = activeSection === link.id;
 
@@ -169,11 +172,15 @@ const Header = () => {
                     onClick={() => scrollToSection(link.id)}
                     className={`
                       cursor-pointer
-                      text-sm font-semibold transition
+                      text-xs sm:text-sm font-bold transition-all duration-200
                       ${
-                        isActive
-                          ? "text-black font-extrabold underline underline-offset-8"
-                          : "text-white hover:text-black"
+                        isScrolled
+                          ? isActive
+                            ? "text-[#7A6730] font-extrabold underline underline-offset-4 decoration-[#7A6730] decoration-2"
+                            : "text-[#2B2B2B] hover:text-[#7A6730]"
+                          : isActive
+                          ? "text-[#f5e4b3] font-extrabold underline underline-offset-4 decoration-[#f5e4b3] decoration-2 drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]"
+                          : "text-white hover:text-[#f5e4b3] drop-shadow-[0_1px_4px_rgba(0,0,0,0.7)]"
                       }
                     `}
                   >
@@ -185,13 +192,16 @@ const Header = () => {
               <button
                 type="button"
                 onClick={() => setPartnerPopup(true)}
-                className="
-                  ml-2 px-5 py-2 rounded-full
-                  bg-white text-[#2a1608]
-                  font-extrabold shadow-md
-                  hover:shadow-lg hover:-translate-y-[1px]
-                  transition cursor-pointer
-                "
+                className={`
+                  ml-1 px-4 py-2 rounded-full
+                  text-white text-xs sm:text-sm font-extrabold shadow-sm
+                  hover:scale-105 transition-all duration-200 cursor-pointer
+                  ${
+                    isScrolled
+                      ? "bg-[#7A6730] hover:bg-[#665526] shadow-md"
+                      : "bg-[#7A6730]/90 hover:bg-[#7A6730] border border-white/30 backdrop-blur-md shadow-md"
+                  }
+                `}
               >
                 Become a Partner
               </button>
@@ -200,7 +210,9 @@ const Header = () => {
             {/* MOBILE MENU BUTTON */}
             <button
               type="button"
-              className="md:hidden text-white text-2xl cursor-pointer"
+              className={`md:hidden text-xl cursor-pointer ${
+                isScrolled ? "text-[#2B2B2B]" : "text-white drop-shadow-md"
+              }`}
               onClick={() => setMobileOpen((p) => !p)}
               aria-label="Toggle menu"
             >
@@ -220,13 +232,8 @@ const Header = () => {
           <div
             className={`
               px-6 pb-6 pt-4 flex flex-col gap-4
-              border-t border-white/25
-              shadow-xl
-              ${
-                isScrolled
-                  ? "bg-gradient-to-r from-[#d8b04a]/95 via-[#e8c86a]/95 to-[#d8b04a]/95 backdrop-blur-md"
-                  : "bg-transparent backdrop-blur-md"
-              }
+              border-t border-[#7A6730]/20
+              shadow-2xl bg-white/95 backdrop-blur-lg
             `}
           >
             {navLinks.map((link) => {
@@ -238,11 +245,11 @@ const Header = () => {
                   type="button"
                   onClick={() => scrollToSection(link.id)}
                   className={`
-                    cursor-pointer text-left text-base font-semibold transition
+                    cursor-pointer text-left text-sm font-bold transition-all duration-200
                     ${
                       isActive
-                        ? "text-black font-extrabold"
-                        : "text-white hover:text-black"
+                        ? "text-[#7A6730] font-extrabold underline underline-offset-4"
+                        : "text-[#2B2B2B] hover:text-[#7A6730]"
                     }
                   `}
                 >
@@ -258,10 +265,9 @@ const Header = () => {
                 setPartnerPopup(true);
               }}
               className="
-                mt-2 w-full px-5 py-3 rounded-xl
-                bg-white text-[#2a1608]
-                font-extrabold shadow-md
-                hover:shadow-lg transition cursor-pointer
+                mt-2 w-full px-4 py-2.5 rounded-xl
+                bg-[#7A6730] text-white text-sm font-extrabold shadow-sm
+                hover:shadow-md transition cursor-pointer
               "
             >
               Become a Partner
